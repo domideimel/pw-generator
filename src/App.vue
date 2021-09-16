@@ -57,3 +57,8 @@ export default defineComponent({
   }
 });
 </script>
+<style scoped>
+.n-layout {
+  height: 100vh;
+}
+</style>
