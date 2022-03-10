@@ -28,9 +28,9 @@
 </template>
 
 <script lang="ts">
-import { useRegisterSW } from 'virtual:pwa-register/vue';
+import { useRegisterSW } from 'virtual:pwa-register/vue'
 
-import { NButton, NButtonGroup, NCard, NLayout, NSpace, NText } from 'naive-ui';
+import { NButton, NButtonGroup, NCard, NLayout, NSpace, NText } from 'naive-ui'
 
 export default {
   components: {

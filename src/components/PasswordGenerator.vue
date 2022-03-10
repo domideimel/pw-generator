@@ -67,11 +67,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import {
-  NButton, NCard, NCheckbox, NForm, NFormItem, NInput, NInputGroup, NInputNumber, NSlider, NSpace, useNotification
-} from 'naive-ui';
-import { copyToClipboard, generatePassword } from '../helpers';
+import { defineComponent, ref } from 'vue'
+import { NButton, NCard, NCheckbox, NForm, NFormItem, NInput, NInputGroup, NInputNumber, NSlider, NSpace, useNotification } from 'naive-ui'
+import { copyToClipboard, generatePassword } from '../helpers'
 
 export default defineComponent({
   components: {

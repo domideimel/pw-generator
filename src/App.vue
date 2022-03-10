@@ -19,14 +19,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
-import {
-  darkTheme, GlobalThemeOverrides, NConfigProvider, NGlobalStyle, NLayout, NNotificationProvider, NSpace, useOsTheme
-} from 'naive-ui';
-import { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface';
-import 'vfonts/Lato.css';
-import PasswordGenerator from './components/PasswordGenerator.vue';
-import ReloadPrompt from './components/ReloadPrompt.vue';
+import { computed, defineComponent } from 'vue'
+import { darkTheme, GlobalThemeOverrides, NConfigProvider, NGlobalStyle, NLayout, NNotificationProvider, NSpace, useOsTheme } from 'naive-ui'
+import { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface'
+import 'vfonts/Lato.css'
+import PasswordGenerator from './components/PasswordGenerator.vue'
+import ReloadPrompt from './components/ReloadPrompt.vue'
 
 export default defineComponent({
   name: 'App',
