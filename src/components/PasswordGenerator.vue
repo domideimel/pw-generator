@@ -1,3 +1,40 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { NButton, NCard, NCheckbox, NForm, NFormItem, NInput, NInputGroup, NInputNumber, NSlider, NSpace, useNotification } from 'naive-ui'
+import { copyToClipboard, generatePassword } from '../helpers'
+
+const uppercase = ref<boolean>(true)
+const lowercase = ref<boolean>(true)
+const numbers = ref<boolean>(true)
+const symbols = ref<boolean>(true)
+const length = ref<number>(20)
+const result = ref<string>('')
+const getResult = () => {
+  result.value = generatePassword(lowercase.value, uppercase.value, numbers.value, symbols.value, length.value)
+}
+const notification = useNotification()
+
+const toggleModal = () => {
+  notification.success({
+    content: 'Dein Passwort wurde kopiert.',
+    meta: '',
+    duration: 10000
+  })
+}
+
+const getGeneratedPassword = () => {
+  if (!result.value.length) return
+  copyToClipboard(result.value)
+  toggleModal()
+  setTimeout(() => resetGenerator(), 2000)
+}
+
+const resetGenerator = () => {
+  result.value = ''
+}
+</script>
+
+
 <template>
   <n-space
     align="center"
@@ -65,69 +102,6 @@
     </n-card>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { NButton, NCard, NCheckbox, NForm, NFormItem, NInput, NInputGroup, NInputNumber, NSlider, NSpace, useNotification } from 'naive-ui'
-import { copyToClipboard, generatePassword } from '../helpers'
-
-export default defineComponent({
-  components: {
-    NCard,
-    NInput,
-    NSpace,
-    NForm,
-    NInputGroup,
-    NButton,
-    NSlider,
-    NFormItem,
-    NCheckbox,
-    NInputNumber
-  },
-  setup () {
-    const uppercase = ref<boolean>(true);
-    const lowercase = ref<boolean>(true);
-    const numbers = ref<boolean>(true);
-    const symbols = ref<boolean>(true);
-    const length = ref<number>(20);
-    const result = ref<string>('');
-    const getResult = () => {
-      result.value = generatePassword(lowercase.value, uppercase.value, numbers.value, symbols.value, length.value);
-    };
-    const notification = useNotification();
-
-    const toggleModal = () => {
-      notification.success({
-        content: 'Dein Passwort wurde kopiert.',
-        meta: '',
-        duration: 10000
-      });
-    };
-
-    const getGeneratedPassword = () => {
-      if (!result.value.length) return;
-      copyToClipboard(result.value);
-      toggleModal();
-      setTimeout(() => resetGenerator(), 2000);
-    };
-
-    const resetGenerator = () => {
-      result.value = '';
-    };
-    return {
-      uppercase,
-      lowercase,
-      numbers,
-      symbols,
-      length,
-      result,
-      getGeneratedPassword,
-      getResult,
-      toggleModal
-    };
-  }
-});
-</script>
 
 <style scoped lang="scss">
 .n-space {

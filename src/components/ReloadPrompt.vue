@@ -1,3 +1,27 @@
+<script setup lang="ts">
+import { useRegisterSW } from 'virtual:pwa-register/vue'
+
+import { NButton, NButtonGroup, NCard, NSpace, NText } from 'naive-ui'
+
+const intervalMS = 60 * 60 * 1000
+const {
+  offlineReady,
+  needRefresh,
+  updateServiceWorker
+} = useRegisterSW({
+  onRegistered (r) {
+    r && setInterval(() => {
+      r.update()
+    }, intervalMS)
+  }
+})
+
+const close = async () => {
+  offlineReady.value = false
+  needRefresh.value = false
+}
+</script>
+
 <template>
   <n-card
     size="small"
@@ -26,49 +50,6 @@
     </n-space>
   </n-card>
 </template>
-
-<script lang="ts">
-import { useRegisterSW } from 'virtual:pwa-register/vue'
-
-import { NButton, NButtonGroup, NCard, NLayout, NSpace, NText } from 'naive-ui'
-
-export default {
-  components: {
-    NCard,
-    NSpace,
-    NButton,
-    NButtonGroup,
-    NText,
-    NLayout
-  },
-  setup () {
-    const intervalMS = 60 * 60 * 1000;
-    const {
-      offlineReady,
-      needRefresh,
-      updateServiceWorker
-    } = useRegisterSW({
-      onRegistered (r) {
-        r && setInterval(() => {
-          r.update();
-        }, intervalMS);
-      }
-    });
-
-    const close = async () => {
-      offlineReady.value = false;
-      needRefresh.value = false;
-    };
-
-    return {
-      offlineReady,
-      needRefresh,
-      updateServiceWorker,
-      close
-    };
-  }
-};
-</script>
 
 <style scoped lang="scss">
 .n-card {
