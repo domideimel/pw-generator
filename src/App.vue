@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed } from 'vue'
 import { darkTheme, GlobalThemeOverrides, NConfigProvider, NGlobalStyle, NLayout, NNotificationProvider, useOsTheme } from 'naive-ui'
 import { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface'
@@ -26,14 +26,14 @@ const themeOverrides: GlobalThemeOverrides = {
     <n-global-style/>
     <n-notification-provider>
       <n-layout
-        embedded
-        content-style="padding: 24px;"
         :native-scrollbar="false"
+        content-style="padding: 24px;"
+        embedded
       >
-        <password-generator />
+        <password-generator/>
       </n-layout>
     </n-notification-provider>
-    <reload-prompt />
+    <reload-prompt/>
   </n-config-provider>
 </template>
 

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 
 import { NButton, NButtonGroup, NCard, NSpace, NText } from 'naive-ui'
@@ -24,12 +24,12 @@ const close = async () => {
 
 <template>
   <n-card
-    size="small"
     v-if="offlineReady || needRefresh"
+    size="small"
   >
     <n-space
-      vertical
       justify="space-between"
+      vertical
     >
       <n-text>
         <span v-if="offlineReady">
@@ -40,7 +40,7 @@ const close = async () => {
         </span>
       </n-text>
       <n-button-group>
-        <n-button type="success" v-if="needRefresh" @click="updateServiceWorker()">
+        <n-button v-if="needRefresh" type="success" @click="updateServiceWorker()">
           Neu laden
         </n-button>
         <n-button type="error" @click="close">
@@ -51,7 +51,7 @@ const close = async () => {
   </n-card>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .n-card {
   bottom: 1.5rem;
   right: 1.5rem;

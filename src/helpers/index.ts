@@ -48,37 +48,37 @@ const randomFunc: RandomFunc = {
   upper: getRandomUpper,
   number: getRandomNumber,
   symbol: getRandomSymbol
-};
+}
 
 const generatePassword = (lower: boolean, upper: boolean, number: boolean, symbol: boolean, length: number): string => {
-  let pwString: string = '';
-  const typesArray: TypesArray = [{ lower }, { upper }, { number }, { symbol }].filter((item) => Object.values(item)[0]);
+  let pwString: string = ''
+  const typesArray: TypesArray = [{ lower }, { upper }, { number }, { symbol }].filter((item) => Object.values(item)[0])
 
-  if (typesArray.length === 0) return '';
+  if (typesArray.length === 0) return ''
   for (let i = 0; i < length; i += typesArray.length) {
     typesArray.forEach((type) => {
       const funcName = Object.keys(type)[0]
       pwString += randomFunc[funcName]()
-    });
+    })
   }
 
-  return pwString.slice(0, length);
-};
+  return pwString.slice(0, length)
+}
 
 const copyToClipboard = (string: string) => {
-  const textArea = document.createElement('textarea');
+  const textArea = document.createElement('textarea')
 
-  if (!string.length) return;
+  if (!string.length) return
 
   textArea.value = string
 
-  document.body.appendChild(textArea);
-  textArea.select();
-  document.execCommand('copy');
-  textArea.remove();
+  document.body.appendChild(textArea)
+  textArea.select()
+  document.execCommand('copy')
+  textArea.remove()
 
-  textArea.value = '';
-};
+  textArea.value = ''
+}
 export {
   getRandomLower, getRandomNumber, getRandomSymbol, getRandomUpper, generatePassword, copyToClipboard
-};
+}

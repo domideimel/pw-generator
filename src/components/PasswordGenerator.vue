@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue'
 import { NButton, NCard, NCheckbox, NForm, NFormItem, NInput, NInputGroup, NInputNumber, NSlider, NSpace, useNotification } from 'naive-ui'
 import { copyToClipboard, generatePassword } from '../helpers'
@@ -46,18 +46,18 @@ const resetGenerator = () => {
         <n-form-item>
           <n-input-group>
             <n-input
-              type="text"
-              size="large"
+              v-model:value="result"
               clearable
               disabled
               placeholder="Passwort"
-              v-model:value="result"
+              size="large"
+              type="text"
               @click="getGeneratedPassword"
             />
             <n-button
-              type="info"
               size="large"
               text-color="#fff"
+              type="info"
               @click="getGeneratedPassword"
             >
               kopieren
@@ -65,35 +65,35 @@ const resetGenerator = () => {
           </n-input-group>
         </n-form-item>
         <n-form-item
+          :show-feedback="false"
           label="Passwortlänge"
           size="small"
-          :show-feedback="false"
         >
           <n-space vertical>
-            <n-slider v-model:value="length" />
+            <n-slider v-model:value="length"/>
             <n-input-number
-              size="small"
-              placeholder="Passwortlänge"
               v-model:value="length"
+              placeholder="Passwortlänge"
+              size="small"
             />
           </n-space>
         </n-form-item>
         <n-form-item
-          size="small"
           :show-feedback="false"
+          size="small"
         >
           <n-space vertical>
-            <n-checkbox v-model:checked="uppercase" label="Großbuchstaben verwenden" />
-            <n-checkbox v-model:checked="lowercase" label="Kleinbuchstaben verwenden" />
-            <n-checkbox v-model:checked="numbers" label="Nummern verwenden" />
-            <n-checkbox v-model:checked="symbols" label="Sonderzeichen verwenden" />
+            <n-checkbox v-model:checked="uppercase" label="Großbuchstaben verwenden"/>
+            <n-checkbox v-model:checked="lowercase" label="Kleinbuchstaben verwenden"/>
+            <n-checkbox v-model:checked="numbers" label="Nummern verwenden"/>
+            <n-checkbox v-model:checked="symbols" label="Sonderzeichen verwenden"/>
           </n-space>
         </n-form-item>
         <n-form-item>
           <n-button
-            type="info"
             size="large"
             text-color="#fff"
+            type="info"
             @click="getResult"
           >Passwort generieren
           </n-button>
@@ -103,7 +103,7 @@ const resetGenerator = () => {
   </n-space>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .n-space {
   flex-basis: 100%;
 }
