@@ -1,6 +1,6 @@
-import { random } from 'lodash-es';
-import TypesArray from '../types/TypesArray';
-import RandomFunc from '../types/RandomFunc';
+import { random } from 'lodash-es'
+import TypesArray from '../types/TypesArray'
+import RandomFunc from '../types/RandomFunc'
 
 /**
  * Create an array and fill it with a range of numbers
@@ -8,38 +8,36 @@ import RandomFunc from '../types/RandomFunc';
 const range = (start: number, end: number): number[] => {
   return Array(end - start + 1)
     .fill(null)
-    .map((_, idx) => start + idx);
-};
+    .map((_, idx) => start + idx)
+}
 
 /**
  * Create a string of special Chars
  */
-const createSymbolString = (): string => {
-  const asciiCharsRanges: number[] = [...range(33, 47), ...range(58, 64), ...range(91, 96), ...range(123, 126)];
-  let string: string = '';
-  asciiCharsRanges.forEach(char => string += String.fromCharCode(char));
-  return string;
-};
+const createSymbolString = (): string[] => {
+  const asciiCharsRanges: number[] = [...range(33, 47), ...range(58, 64), ...range(91, 96), ...range(123, 126)]
+  return asciiCharsRanges.map(char => String.fromCharCode(char))
+}
 
 /**
  * Generates Random Lowercase Letter
  */
-const getRandomLower = (): string => String.fromCharCode(random(97, 122));
+const getRandomLower = (): string => String.fromCharCode(random(97, 122))
 
 /**
  * Generates Random Uppercase Letter
  */
-const getRandomUpper = (): string => String.fromCharCode(random(65, 90));
+const getRandomUpper = (): string => String.fromCharCode(random(65, 90))
 
 /**
  * Generates Random Number
  */
-const getRandomNumber = (): string => String.fromCharCode(random(48, 57));
+const getRandomNumber = (): string => String.fromCharCode(random(48, 57))
 
 /**
  * Generates Random Symbol
  */
-const getRandomSymbol = (symbols:string = createSymbolString()): string => symbols[random(symbols.length)];
+const getRandomSymbol = (symbols: string [] = createSymbolString()): string => symbols[random(0, symbols.length - 1)]
 
 /**
  * Generate Password
@@ -59,8 +57,8 @@ const generatePassword = (lower: boolean, upper: boolean, number: boolean, symbo
   if (typesArray.length === 0) return '';
   for (let i = 0; i < length; i += typesArray.length) {
     typesArray.forEach((type) => {
-      const funcName = Object.keys(type)[0];
-      pwString += randomFunc[funcName]();
+      const funcName = Object.keys(type)[0]
+      pwString += randomFunc[funcName]()
     });
   }
 
