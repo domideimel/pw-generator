@@ -1,4 +1,4 @@
-import { isEmpty, omitBy, random } from 'lodash-es'
+import { isEmpty, omitBy, random, sample } from 'lodash-es'
 import RandomFunc from '../types/RandomFunc'
 import { GenerationProperties } from '../types/GenerationProperties'
 
@@ -51,12 +51,13 @@ const randomFunc: RandomFunc = {
 }
 
 const generatePassword = ({ length, ...args }: GenerationProperties): string => {
-  const filteredTypes = omitBy<GenerationProperties>(args, (value) => !Boolean(value))
+  type FilteredTypes = Omit<GenerationProperties, 'length'>
+  const filteredTypes = omitBy<FilteredTypes>(args, (value) => !Boolean(value))
   if (isEmpty(filteredTypes)) return ''
-  const typesArray = Object.entries(filteredTypes)
+  const typesArray = Object.entries(filteredTypes as FilteredTypes)
 
   return Array.from({ length }, () => {
-    const [type] = typesArray[Math.floor(Math.random() * typesArray.length)]
+    const [type] = sample(typesArray) as [keyof FilteredTypes, boolean]
     return randomFunc[type as keyof RandomFunc]()
   }).join('')
 }
