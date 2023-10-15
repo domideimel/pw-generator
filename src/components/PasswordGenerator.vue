@@ -29,7 +29,7 @@ const getGeneratedPassword = async () => {
     await copy(result.value)
     state.value = [result.value, ...state.value].slice(0, PASSWORD_CACHE_LENGTH)
     notification.success(NOTIFICATION_SUCCESS_CONFIG)
-  } catch (e) {
+  } catch (e: any) {
     notification.error({
       ...NOTIFICATION_ERROR_CONFIG,
       content: e.message

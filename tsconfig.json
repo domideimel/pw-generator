@@ -10,8 +10,7 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "types": [
-      "vite-plugin-pwa/client",
-      "vite-plugin-pwa/vue"
+      "@types/web-bluetooth"
     ]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
