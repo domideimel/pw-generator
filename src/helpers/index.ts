@@ -65,10 +65,6 @@ const generatePassword = (lower: boolean, upper: boolean, number: boolean, symbo
   return pwString.slice(0, length)
 }
 
-const copyToClipboard = async (string: string) => {
-  if (!string.length && !navigator.clipboard) return
-  await navigator.clipboard.writeText(string)
-}
 export {
-  getRandomLower, getRandomNumber, getRandomSymbol, getRandomUpper, generatePassword, copyToClipboard
+  getRandomLower, getRandomNumber, getRandomSymbol, getRandomUpper, generatePassword
 }

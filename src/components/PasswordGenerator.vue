@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { NButton, NCheckbox, NForm, NFormItem, NInput, NInputGroup, NInputNumber, NSlider, NSpace, useNotification } from 'naive-ui'
-import { copyToClipboard, generatePassword } from '../helpers'
+import { generatePassword } from '../helpers'
 import Card from './Card.vue'
+import { useClipboard, useStorage } from '@vueuse/core'
+import { NOTIFICATION_ERROR_CONFIG, NOTIFICATION_SUCCESS_CONFIG } from '../lib/constants'
 
 const uppercase = ref<boolean>(true)
 const lowercase = ref<boolean>(true)
@@ -10,28 +12,29 @@ const numbers = ref<boolean>(true)
 const symbols = ref<boolean>(true)
 const length = ref<number>(20)
 const result = ref<string>('')
+
+const notification = useNotification()
+const { copy } = useClipboard({ legacy: true })
+const state = useStorage<string[]>('lastGeneratedPasswords', [], localStorage)
+
 const getResult = () => {
   result.value = generatePassword(lowercase.value, uppercase.value, numbers.value, symbols.value, length.value)
 }
-const notification = useNotification()
-
-const toggleModal = () => {
-  notification.success({
-    content: 'Dein Passwort wurde kopiert.',
-    meta: '',
-    duration: 10000
-  })
-}
 
 const getGeneratedPassword = async () => {
-  if (!result.value.length) return
-  await copyToClipboard(result.value)
-  toggleModal()
-  setTimeout(() => resetGenerator(), 2000)
-}
-
-const resetGenerator = () => {
-  result.value = ''
+  try {
+    if (!result.value.length) {
+      throw new Error('Es wurde noch kein Passwort generiert.')
+    }
+    await copy(result.value)
+    state.value = [result.value, ...state.value]
+    notification.success(NOTIFICATION_SUCCESS_CONFIG)
+  } catch (e) {
+    notification.error({
+      ...NOTIFICATION_ERROR_CONFIG,
+      content: e.message
+    })
+  }
 }
 </script>
 
