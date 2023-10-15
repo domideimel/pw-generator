@@ -65,19 +65,9 @@ const generatePassword = (lower: boolean, upper: boolean, number: boolean, symbo
   return pwString.slice(0, length)
 }
 
-const copyToClipboard = (string: string) => {
-  const textArea = document.createElement('textarea')
-
-  if (!string.length) return
-
-  textArea.value = string
-
-  document.body.appendChild(textArea)
-  textArea.select()
-  document.execCommand('copy')
-  textArea.remove()
-
-  textArea.value = ''
+const copyToClipboard = async (string: string) => {
+  if (!string.length && !navigator.clipboard) return
+  await navigator.clipboard.writeText(string)
 }
 export {
   getRandomLower, getRandomNumber, getRandomSymbol, getRandomUpper, generatePassword, copyToClipboard
