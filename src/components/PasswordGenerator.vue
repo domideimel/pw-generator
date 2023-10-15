@@ -18,7 +18,13 @@ const { copy } = useClipboard({ legacy: true })
 const state = useStorage<string[]>('lastGeneratedPasswords', [], localStorage)
 
 const getResult = () => {
-  result.value = generatePassword(lowercase.value, uppercase.value, numbers.value, symbols.value, length.value)
+  result.value = generatePassword({
+    lower: lowercase.value,
+    upper: uppercase.value,
+    number: numbers.value,
+    symbol: symbols.value,
+    length: length.value
+  })
 }
 
 const getGeneratedPassword = async () => {

@@ -1,6 +1,7 @@
 import { random } from 'lodash-es'
 import TypesArray from '../types/TypesArray'
 import RandomFunc from '../types/RandomFunc'
+import { GeneratePw } from '../types/GeneratePw'
 
 /**
  * Create an array and fill it with a range of numbers
@@ -50,7 +51,7 @@ const randomFunc: RandomFunc = {
   symbol: getRandomSymbol
 }
 
-const generatePassword = (lower: boolean, upper: boolean, number: boolean, symbol: boolean, length: number): string => {
+const generatePassword = ({ lower, upper, number, symbol, length }: GeneratePw): string => {
   let pwString: string = ''
   const typesArray: TypesArray = [{ lower }, { upper }, { number }, { symbol }].filter((item) => Object.values(item)[0])
 
