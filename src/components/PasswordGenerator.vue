@@ -72,7 +72,6 @@ const getGeneratedPassword = async () => {
           />
           <n-button
             size="large"
-            text-color="#fff"
             :ghost="true"
             @click="getGeneratedPassword"
             :disabled="!result.length || hasCopied"
@@ -107,7 +106,6 @@ const getGeneratedPassword = async () => {
       <n-form-item>
         <n-button
           size="large"
-          text-color="#fff"
           @click="getResult"
           :ghost="true"
         >Passwort generieren
