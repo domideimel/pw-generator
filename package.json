@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@vicons/material": "^0.12.0",
     "@vueuse/core": "^10.5.0",
     "lodash-es": "^4.17.21",
     "naive-ui": "^2.35.0",
@@ -16,7 +17,6 @@
   "devDependencies": {
     "@types/lodash-es": "^4.17.9",
     "@types/web-bluetooth": "^0.0.18",
-    "@vicons/material": "^0.12.0",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vue/compiler-sfc": "^3.3.4",
     "sass": "^1.69.3",
