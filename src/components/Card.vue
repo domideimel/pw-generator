@@ -13,6 +13,9 @@ const props = defineProps<{
     wrap
   >
     <n-card :title="props.title">
+      <template #header-extra>
+        <slot name="header-extra"/>
+      </template>
       <slot/>
     </n-card>
   </n-space>

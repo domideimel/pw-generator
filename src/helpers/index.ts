@@ -1,6 +1,5 @@
 import { isEmpty, omitBy, random, sample } from 'lodash-es'
-import RandomFunc from '../types/RandomFunc'
-import { GenerationProperties } from '../types/GenerationProperties'
+import { GenerationProperties, RandomFunc } from '../types/types'
 
 /**
  * Create an array and fill it with a range of numbers

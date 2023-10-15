@@ -5,6 +5,7 @@ import { generatePassword } from '../helpers'
 import Card from './Card.vue'
 import { useClipboard, useStorage } from '@vueuse/core'
 import { NOTIFICATION_ERROR_CONFIG, NOTIFICATION_SUCCESS_CONFIG, PASSWORD_CACHE_LENGTH } from '../lib/constants'
+import { PasswordMap } from '../types/types'
 
 const uppercase = ref<boolean>(true)
 const lowercase = ref<boolean>(true)
@@ -13,11 +14,14 @@ const symbols = ref<boolean>(true)
 const length = ref<number>(20)
 const result = ref<string>('')
 
+const hasCopied = ref<boolean>(false)
+
 const notification = useNotification()
 const { copy } = useClipboard({ legacy: true })
-const state = useStorage<string[]>('lastGeneratedPasswords', [], localStorage)
+const state = useStorage<PasswordMap>('lastGeneratedPasswords', new Map(), localStorage)
 
 const getResult = () => {
+  hasCopied.value = false
   result.value = generatePassword({
     lower: lowercase.value,
     upper: uppercase.value,
@@ -32,9 +36,16 @@ const getGeneratedPassword = async () => {
     if (!result.value.length) {
       throw new Error('Es wurde noch kein Passwort generiert.')
     }
+    if (hasCopied.value) {
+      throw new Error('Das Passwort wurde bereits kopiert.')
+    }
+    if (state.value.size >= PASSWORD_CACHE_LENGTH) {
+      state.value.delete(state.value.keys().next().value)
+    }
     await copy(result.value)
-    state.value = [result.value, ...state.value].slice(0, PASSWORD_CACHE_LENGTH)
+    state.value.set(result.value, result.value)
     notification.success(NOTIFICATION_SUCCESS_CONFIG)
+    hasCopied.value = true
   } catch (e: any) {
     notification.error({
       ...NOTIFICATION_ERROR_CONFIG,
@@ -62,8 +73,9 @@ const getGeneratedPassword = async () => {
           <n-button
             size="large"
             text-color="#fff"
-            type="info"
+            :ghost="true"
             @click="getGeneratedPassword"
+            :disabled="!result.length || hasCopied"
           >
             kopieren
           </n-button>
@@ -98,8 +110,8 @@ const getGeneratedPassword = async () => {
         <n-button
           size="large"
           text-color="#fff"
-          type="info"
           @click="getResult"
+          :ghost="true"
         >Passwort generieren
         </n-button>
       </n-form-item>
