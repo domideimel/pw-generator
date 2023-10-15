@@ -5,6 +5,14 @@ import { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface'
 import 'vfonts/Lato.css'
 import PasswordGenerator from './components/PasswordGenerator.vue'
 import LastPasswords from './components/LastPasswords.vue'
+import { useStorage } from '@vueuse/core/index'
+
+const hasPurgesOldCache = useStorage<boolean>('hasPurgesOldCache', false, localStorage)
+
+if (!hasPurgesOldCache.value) {
+  localStorage.clear()
+  hasPurgesOldCache.value = true
+}
 
 const osThemeRef = useOsTheme()
 const theme = computed<BuiltInGlobalTheme | null>(() => (osThemeRef.value === 'dark' ? darkTheme : null))
