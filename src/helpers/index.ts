@@ -1,7 +1,6 @@
-import { random } from 'lodash-es'
-import TypesArray from '../types/TypesArray'
+import { isEmpty, omitBy, random } from 'lodash-es'
 import RandomFunc from '../types/RandomFunc'
-import { GeneratePw } from '../types/GeneratePw'
+import { GenerationProperties } from '../types/GenerationProperties'
 
 /**
  * Create an array and fill it with a range of numbers
@@ -51,19 +50,15 @@ const randomFunc: RandomFunc = {
   symbol: getRandomSymbol
 }
 
-const generatePassword = ({ lower, upper, number, symbol, length }: GeneratePw): string => {
-  let pwString: string = ''
-  const typesArray: TypesArray = [{ lower }, { upper }, { number }, { symbol }].filter((item) => Object.values(item)[0])
+const generatePassword = ({ length, ...args }: GenerationProperties): string => {
+  const filteredTypes = omitBy<GenerationProperties>(args, (value) => !Boolean(value))
+  if (isEmpty(filteredTypes)) return ''
+  const typesArray = Object.entries(filteredTypes)
 
-  if (typesArray.length === 0) return ''
-  for (let i = 0; i < length; i += typesArray.length) {
-    typesArray.forEach((type) => {
-      const funcName = Object.keys(type)[0]
-      pwString += randomFunc[funcName]()
-    })
-  }
-
-  return pwString.slice(0, length)
+  return Array.from({ length }, () => {
+    const [type] = typesArray[Math.floor(Math.random() * typesArray.length)]
+    return randomFunc[type as keyof RandomFunc]()
+  }).join('')
 }
 
 export {
