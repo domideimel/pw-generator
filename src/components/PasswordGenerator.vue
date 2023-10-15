@@ -84,14 +84,12 @@ const getGeneratedPassword = async () => {
       <n-form-item
         :show-feedback="false"
         label="Passwortlänge"
-        size="small"
       >
         <n-space vertical>
           <n-slider v-model:value="length"/>
           <n-input-number
             v-model:value="length"
             placeholder="Passwortlänge"
-            size="small"
           />
         </n-space>
       </n-form-item>
