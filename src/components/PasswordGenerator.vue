@@ -4,7 +4,7 @@ import { NButton, NCheckbox, NForm, NFormItem, NInput, NInputGroup, NInputNumber
 import { generatePassword } from '../helpers'
 import Card from './Card.vue'
 import { useClipboard, useStorage } from '@vueuse/core'
-import { NOTIFICATION_ERROR_CONFIG, NOTIFICATION_SUCCESS_CONFIG } from '../lib/constants'
+import { NOTIFICATION_ERROR_CONFIG, NOTIFICATION_SUCCESS_CONFIG, PASSWORD_CACHE_LENGTH } from '../lib/constants'
 
 const uppercase = ref<boolean>(true)
 const lowercase = ref<boolean>(true)
@@ -27,7 +27,7 @@ const getGeneratedPassword = async () => {
       throw new Error('Es wurde noch kein Passwort generiert.')
     }
     await copy(result.value)
-    state.value = [result.value, ...state.value]
+    state.value = [result.value, ...state.value].slice(0, PASSWORD_CACHE_LENGTH)
     notification.success(NOTIFICATION_SUCCESS_CONFIG)
   } catch (e) {
     notification.error({

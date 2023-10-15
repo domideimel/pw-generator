@@ -9,3 +9,5 @@ export const NOTIFICATION_ERROR_CONFIG = {
   meta: '',
   duration: 10000
 }
+
+export const PASSWORD_CACHE_LENGTH = 10
