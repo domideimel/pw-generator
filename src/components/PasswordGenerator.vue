@@ -6,6 +6,9 @@ import Card from './Card.vue'
 import { useClipboard, useStorage } from '@vueuse/core'
 import { NOTIFICATION_ERROR_CONFIG, NOTIFICATION_SUCCESS_CONFIG, PASSWORD_CACHE_LENGTH } from '../lib/constants'
 import { PasswordMap } from '../types/types'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({ useScope: 'global' })
 
 const uppercase = ref<boolean>(true)
 const lowercase = ref<boolean>(true)
@@ -34,17 +37,20 @@ const getResult = () => {
 const getGeneratedPassword = async () => {
   try {
     if (!result.value.length) {
-      throw new Error('Es wurde noch kein Passwort generiert.')
+      throw new Error(t('not_generated_error'))
     }
     if (hasCopied.value) {
-      throw new Error('Das Passwort wurde bereits kopiert.')
+      throw new Error(t('copied_error'))
     }
     if (state.value.size >= PASSWORD_CACHE_LENGTH) {
       state.value.delete(state.value.keys().next().value)
     }
     await copy(result.value)
     state.value.set(result.value, result.value)
-    notification.success(NOTIFICATION_SUCCESS_CONFIG)
+    notification.success({
+      ...NOTIFICATION_SUCCESS_CONFIG,
+      content: t(NOTIFICATION_SUCCESS_CONFIG.content)
+    })
     hasCopied.value = true
   } catch (e: any) {
     notification.error({
@@ -57,7 +63,7 @@ const getGeneratedPassword = async () => {
 
 
 <template>
-  <card title="Passwort Generator">
+  <card :title="$t('title')">
     <n-form>
       <n-form-item>
         <n-input-group>
@@ -65,7 +71,7 @@ const getGeneratedPassword = async () => {
             v-model:value="result"
             clearable
             disabled
-            placeholder="Passwort"
+            :placeholder="$t('placeholder')"
             size="large"
             type="text"
             @click="getGeneratedPassword"
@@ -76,19 +82,19 @@ const getGeneratedPassword = async () => {
             @click="getGeneratedPassword"
             :disabled="!result.length || hasCopied"
           >
-            kopieren
+            {{ hasCopied ? $t('copied') : $t('copy') }}
           </n-button>
         </n-input-group>
       </n-form-item>
       <n-form-item
         :show-feedback="false"
-        label="Passwortlänge"
+        :label="$t('pw_length')"
       >
         <n-space vertical>
           <n-slider v-model:value="length"/>
           <n-input-number
             v-model:value="length"
-            placeholder="Passwortlänge"
+            :placeholder="$t('pw_length')"
           />
         </n-space>
       </n-form-item>
@@ -97,10 +103,10 @@ const getGeneratedPassword = async () => {
         size="small"
       >
         <n-space vertical>
-          <n-checkbox v-model:checked="uppercase" label="Großbuchstaben verwenden"/>
-          <n-checkbox v-model:checked="lowercase" label="Kleinbuchstaben verwenden"/>
-          <n-checkbox v-model:checked="numbers" label="Nummern verwenden"/>
-          <n-checkbox v-model:checked="symbols" label="Sonderzeichen verwenden"/>
+          <n-checkbox v-model:checked="uppercase" :label="$t('uppercase')"/>
+          <n-checkbox v-model:checked="lowercase" :label="$t('lowercase')"/>
+          <n-checkbox v-model:checked="numbers" :label="$t('numbers')"/>
+          <n-checkbox v-model:checked="symbols" :label="$t('symbols')"/>
         </n-space>
       </n-form-item>
       <n-form-item>
@@ -108,7 +114,8 @@ const getGeneratedPassword = async () => {
           size="large"
           @click="getResult"
           :ghost="true"
-        >Passwort generieren
+        >
+          {{ $t('generate') }}
         </n-button>
       </n-form-item>
     </n-form>
