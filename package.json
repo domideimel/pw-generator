@@ -12,7 +12,7 @@
     "lodash-es": "^4.17.21",
     "naive-ui": "^2.35.0",
     "vfonts": "^0.1.0",
-    "vue": "^3.3.4",
+    "vue": "^3.3.6",
     "vue-i18n": "9"
   },
   "devDependencies": {
