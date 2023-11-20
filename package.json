@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.11",
-    "@types/web-bluetooth": "^0.0.19",
+    "@types/web-bluetooth": "^0.0.20",
     "@vitejs/plugin-vue": "^4.4.1",
     "@vue/compiler-sfc": "^3.3.8",
     "sass": "^1.69.5",
