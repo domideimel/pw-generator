@@ -32,8 +32,8 @@ devDependencies:
     specifier: ^4.17.11
     version: 4.17.11
   '@types/web-bluetooth':
-    specifier: ^0.0.19
-    version: 0.0.19
+    specifier: ^0.0.20
+    version: 0.0.20
   '@vitejs/plugin-vue':
     specifier: ^4.4.1
     version: 4.4.1(vite@4.5.0)(vue@3.3.8)
@@ -1622,13 +1622,8 @@ packages:
     resolution: {integrity: sha512-IDaobHimLQhjwsQ/NMwRVfa/yL7L/wriQPMhw1ZJall0KX6E1oxk29XMDeilW5qTIg5aoiqf5Udy8U/51aNoQQ==}
     dev: true
 
-  /@types/web-bluetooth@0.0.19:
-    resolution: {integrity: sha512-0Eoq1m8n3qXnV8tUJpL+Dgk09jJOp7IN1kXuwn65+i1VgxzNRW6sArEDrD9uPe5+wgBp3ZNYMAAtrminQf5RjA==}
-    dev: true
-
   /@types/web-bluetooth@0.0.20:
     resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
-    dev: false
 
   /@vicons/material@0.12.0:
     resolution: {integrity: sha512-chv1CYAl8P32P3Ycwgd5+vw/OFNc2mtkKdb1Rw4T5IJmKy6GVDsoUKV3N2l208HATn7CCQphZtuPDdsm7K2kmA==}
