@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@vicons/material": "^0.12.0",
-    "@vueuse/core": "^10.6.1",
+    "@vueuse/core": "^10.7.0",
     "lodash-es": "^4.17.21",
     "naive-ui": "^2.35.0",
     "vfonts": "^0.1.0",
