@@ -12,14 +12,14 @@
     "lodash-es": "^4.17.21",
     "naive-ui": "^2.35.0",
     "vfonts": "^0.1.0",
-    "vue": "^3.3.10",
+    "vue": "^3.3.11",
     "vue-i18n": "9"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
     "@types/web-bluetooth": "^0.0.20",
     "@vitejs/plugin-vue": "^4.5.1",
-    "@vue/compiler-sfc": "^3.3.9",
+    "@vue/compiler-sfc": "^3.3.11",
     "sass": "^1.69.5",
     "typescript": "^5.3.2",
     "vite": "^5.0.5",
