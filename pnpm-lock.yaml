@@ -15,8 +15,8 @@ dependencies:
     specifier: ^4.17.21
     version: 4.17.21
   naive-ui:
-    specifier: ^2.37.3
-    version: 2.37.3(vue@3.4.19)
+    specifier: ^2.38.0
+    version: 2.38.0(vue@3.4.19)
   vfonts:
     specifier: ^0.1.0
     version: 0.1.0
@@ -2885,8 +2885,8 @@ packages:
     resolution: {integrity: sha512-ckmWDJjphvd/FvZawgygcUeQCxzvohjFO5RxTjj4eq8kw359gFF3E1brjfI+viLMxss5JrHTDRHZvu2/tuy0Qg==}
     dev: true
 
-  /naive-ui@2.37.3(vue@3.4.19):
-    resolution: {integrity: sha512-aUkHFXVIluSi8Me+npbcsdv1NYhVMj5t9YaruoCESlqmfqspj+R2QHEVXkTtUI1kQwVrABMCtAGq/wountqjZA==}
+  /naive-ui@2.38.0(vue@3.4.19):
+    resolution: {integrity: sha512-Sa1hPUSTaOBvFy5hBcdQ6ajGVqt59QHN4p6wcsC5stVo6JjQPnbRTUvWtNG3gAsLhCvHQBm9NXeJG5Ne1OFQ4Q==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
