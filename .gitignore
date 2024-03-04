@@ -4,3 +4,6 @@ dist
 dist-ssr
 *.local
 dev-dist
+
+# Local Netlify folder
+.netlify
